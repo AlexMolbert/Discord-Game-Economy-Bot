@@ -115,7 +115,7 @@ namespace DiscordBot
             await InitCommands();
 
             // Login and connect.
-            await _client.LoginAsync(TokenType.Bot, "NDA0MzE0NTM5OTk2NDc5NDg4.DfTB_w.jT_s7VOv91BOFfYXBPc61f7gUWg");
+            await _client.LoginAsync(TokenType.Bot, "NDA0MzE0NTM5OTk2NDc5NDg4.DfXlKg.woFAaLs2bB7VDgygj9bF1tYHO6E");
             await _client.StartAsync();
 
             // Wait infinitely so your bot actually stays connected.

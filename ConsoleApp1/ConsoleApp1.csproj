@@ -142,7 +142,6 @@
     <Compile Include="CasinoBot.cs" />
     <Compile Include="QuickGames.cs" />
     <Compile Include="help.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UserDbContext.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="User.cs" />

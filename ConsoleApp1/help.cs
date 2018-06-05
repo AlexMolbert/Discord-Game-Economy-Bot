@@ -14,5 +14,9 @@ using Microsoft.Extensions;
 
 public class HelpModule : ModuleBase<SocketCommandContext>
 {
-
+    [Command("help"), Summary("Flip a coin!.")]
+    public async Task Help()
+    {
+        this.Context.Channel.SendMessageAsync("!register!wallet!topup!flip");
+    }
 }

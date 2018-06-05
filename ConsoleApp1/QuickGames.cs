@@ -43,6 +43,7 @@ public class QuickGamesCommands : ModuleBase
                     {
                         await this.Context.Channel.SendMessageAsync("Heads!");              
                         walletinfo.Points = walletinfo.Points + amount;
+                        walletinfo.Won = walletinfo.Won + amount;
                         modified = true;
                         win = true;
                     }
@@ -52,6 +53,7 @@ public class QuickGamesCommands : ModuleBase
                         {
                             await this.Context.Channel.SendMessageAsync("Tails!");                    
                             walletinfo.Points = walletinfo.Points - amount;
+                            walletinfo.Lost = walletinfo.Lost + amount;
                             modified = true;
                             win = false;
                         }

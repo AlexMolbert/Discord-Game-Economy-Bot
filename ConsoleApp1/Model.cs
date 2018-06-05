@@ -49,6 +49,9 @@
         public WalletInfo()
         {
             Points = 20;
+            Won = 0;
+            Lost = 0;
+            TopupAmount = 0;
         }
 
         public int Id { get; set; }
@@ -56,6 +59,16 @@
         public Guid Guid { get; set; }
 
         public int Points { get; set; }
+
+        public int Won { get; set; }
+
+        public int Lost { get; set; }
+
+        public int TopupAmount { get; set; }
+
+        public int TopupCount { get; set; }
+
+        public int TopupFail { get; set; }
 
         public DateTime Created_on { get; set; }
 

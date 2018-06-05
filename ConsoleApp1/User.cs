@@ -138,20 +138,30 @@ public class UserCommands : ModuleBase
             {
                 var info = wdb.WalletInfos.SingleOrDefaultAsync(w => w.Guid == row.Guid);
                 var user = Context.User.Mention;
+                WalletInfo walletinfo = (from x in wdb.WalletInfos where x.Guid == row.Guid select x).First();
                 if (info.Result.Modified_on <= current.AddHours(-time))
-                {
-                    WalletInfo walletinfo = (from x in wdb.WalletInfos where x.Guid == row.Guid select x).First();
+                {                  
                     walletinfo.Points = walletinfo.Points + amount;
-                    walletinfo.Modified_on = current;
-                    wdb.SaveChanges();
-                    this.Context.Channel.SendMessageAsync(user + "Your new wallet balance is : " + walletinfo.Points);
+                    walletinfo.TopupAmount = walletinfo.TopupAmount + amount;
+                    walletinfo.TopupCount = walletinfo.TopupCount + 1;
+                    walletinfo.Modified_on = current;                   
+                    this.Context.Channel.SendMessageAsync(user + " Topup successfull. Your new wallet balance is : " + walletinfo.Points);
 
                 }
                 else
                 {
+                    walletinfo.TopupFail = walletinfo.TopupFail + 1;
                     TimeSpan span = current.Subtract(info.Result.Modified_on);
-                    this.Context.Channel.SendMessageAsync(user + "You may only top up once per hour. It has been " + (int)span.TotalMinutes + " minutes since your last topup.");         
+                    if(time == 1)
+                    {
+                        this.Context.Channel.SendMessageAsync(user + "You may top up every hour. It has been " + (int)span.TotalMinutes + " minutes since your last topup.");
+                    }
+                    else
+                    {
+                        this.Context.Channel.SendMessageAsync(user + "You may top up every " + time + " hours. It has been " + (int)span.TotalMinutes + " minutes since your last topup.");
+                    }
                 }
+                wdb.SaveChanges();
             }
 
         }
